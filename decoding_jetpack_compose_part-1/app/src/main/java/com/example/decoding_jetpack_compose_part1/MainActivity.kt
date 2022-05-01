@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 
 
-import com.example.decoding_jetpack_compose_part1.bottombar.BottomNavigationScreen
+import com.example.decoding_jetpack_compose_part1.view.BottomNavigationScreen
 
 class MainActivity : ComponentActivity() {
 

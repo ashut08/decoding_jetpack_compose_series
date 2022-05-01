@@ -1,5 +1,6 @@
 package com.example.decoding_jetpack_compose_part1.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -9,6 +10,7 @@ import com.example.decoding_jetpack_compose_part1.screens.ProfileScreen
 import com.example.decoding_jetpack_compose_part1.screens.SearchScreen
 
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "home") {

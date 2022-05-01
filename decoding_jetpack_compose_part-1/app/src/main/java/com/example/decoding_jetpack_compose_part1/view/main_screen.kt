@@ -1,4 +1,4 @@
-package com.example.decoding_jetpack_compose_part1.bottombar
+package com.example.decoding_jetpack_compose_part1.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -43,7 +43,7 @@ fun BottomNavigationScreen() {
             Drawer(
 
                 item = ScreenModel().screensInHomeFromBottomNav,
-                selected = true,
+
                 navController = navController,
 
                 scope = scope,
@@ -76,10 +76,8 @@ fun BottomNavigationScreen() {
             BottomBar(
                 screens = ScreenModel().screensInHomeFromBottomNav,
                 navController = navController,
-                onItemClick = {
 
-                }
-            )
+                )
 
 
         },
@@ -95,13 +93,12 @@ fun BottomNavigationScreen() {
 @Composable
 fun Drawer(
     item: List<ScreenModel.HomeScreens>,
-    selected: Boolean,
+
     navController: NavController,
     scaffoldState: ScaffoldState,
     scope: CoroutineScope
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+
     Column() {
         Surface(
             modifier = Modifier
@@ -117,9 +114,14 @@ fun Drawer(
 
                 Text(text = "I", fontSize = 28.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(7.dp))
-                Icon(imageVector = Icons.Filled.Favorite, contentDescription = "", tint = Color.Red, modifier = Modifier.height(40.dp))
+                Icon(
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = "",
+                    tint = Color.Red,
+                    modifier = Modifier.height(40.dp)
+                )
                 Spacer(modifier = Modifier.width(7.dp))
-                Text("Jetpack Compose",fontSize = 28.sp, fontWeight = FontWeight.Bold)
+                Text("Jetpack Compose", fontSize = 28.sp, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -131,22 +133,8 @@ fun Drawer(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(onClick = {
-                        navController.navigate(item.route) {
-                            // Pop up to the start destination of the graph to
-                            // avoid building up a large stack of destinations
-                            // on the back stack as users select items
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
-                            }
-                            // Avoid multiple copies of the same destination when
-                            // reselecting the same item
-                            launchSingleTop = true
-                            // Restore state when reselecting a previously selected item
-                            restoreState = true
-                        }
-                        // Close drawer
+                        navController.navigate(item.route)
+                        // Closenav drawer
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
@@ -176,7 +164,8 @@ fun Drawer(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center,
             fontSize = 25.sp,
-            fontWeight = FontWeight.Bold,)
+            fontWeight = FontWeight.Bold,
+        )
 
         Spacer(modifier = Modifier.height(30.dp))
     }

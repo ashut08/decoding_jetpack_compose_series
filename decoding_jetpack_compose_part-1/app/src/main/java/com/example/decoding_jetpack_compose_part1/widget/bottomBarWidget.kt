@@ -19,31 +19,39 @@ fun BottomBar(
     modifier: Modifier = Modifier,
     screens: List<ScreenModel.HomeScreens>,
     navController: NavController,
-    onItemClick: (ScreenModel.HomeScreens) -> Unit
-) {
-    BottomNavigation {
-        val backStackEntry =navController.currentBackStackEntryAsState()
 
+    ) {
+    BottomNavigation {
+        val backStackEntry = navController.currentBackStackEntryAsState()
         screens.forEach {
 
 
                 screens ->
-            val selected = screens.route == backStackEntry.value?.destination?.route
+            val currentRoute = backStackEntry.value?.destination?.route;
+            val selected = currentRoute == screens.route
+
             BottomNavigationItem(
-                icon = { Icon(imageVector = screens.icon, contentDescription = "", tint = if (selected) Color.White else Color.Black  )   },
+                icon = {
+                    Icon(
+                        imageVector = screens.icon,
+                        contentDescription = "",
+                        tint = if (selected) Color.White else Color.Black
+                    )
+                },
                 selected = selected,
-                label =  {
+                label = {
                     Text(
-                       if(selected) screens.title else "", // Label
-                        fontWeight = FontWeight.SemiBold
-                    ,
+                        if (selected) screens.title else "", // Label
+                        fontWeight = FontWeight.SemiBold,
                         color = Color.White
                     )
                 },
 
                 onClick = {
+                    if (currentRoute != screens.route) {
+                        navController.navigate(screens.route)
 
-                    navController.navigate(screens.route)
+                    }
 
                 }
 
