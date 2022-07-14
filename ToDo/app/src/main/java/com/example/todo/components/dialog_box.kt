@@ -11,13 +11,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo.model.TodoList
+import com.example.todo.view.screens.NoteViewModel
+import java.util.*
 
 @Composable
-fun FullScreenDialog(openDialog: MutableState<Boolean>) {
+fun FullScreenDialog(
+    openDialog: MutableState<Boolean>,
+    noteViewModel: NoteViewModel = viewModel()
+
+
+) {
     var title by remember { mutableStateOf(TextFieldValue("")) }
     var task by remember { mutableStateOf(TextFieldValue("")) }
-    val todolist = remember { mutableStateListOf <TodoList>() }
+//    val todo by remember { mutableStateOf(NoteViewModel()) }
     AlertDialog(
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = false),
 
@@ -75,16 +83,17 @@ fun FullScreenDialog(openDialog: MutableState<Boolean>) {
             Button(
 
                 onClick = {
-                    openDialog.value = false
-                    todolist.add(
+
+                    noteViewModel.addTodoList(
                         TodoList(
-                            id = "ds",
+                            id = UUID.randomUUID().toString(),
                             title = title.text,
                             task = task.text,
                             isComplete = false
 
                         )
                     )
+                    openDialog.value = false
                 }) {
                 Text("This is the Confirm Button")
             }
