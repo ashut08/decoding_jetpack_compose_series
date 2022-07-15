@@ -8,7 +8,7 @@ import com.example.todo.model.TodoList
 import kotlin.math.log
 
 class NoteViewModel : ViewModel() {
-    private val _todoList = mutableStateListOf<TodoList>()
+    private var _todoList = mutableStateListOf<TodoList>()
 
 
     init {
@@ -32,14 +32,18 @@ class NoteViewModel : ViewModel() {
 
 
     fun markAsComplete(todoList: TodoList, value: Boolean) {
-        val g =todoList.copy()
-        val index = _todoList.indexOf(g);
 
+        val index = _todoList.indexOf(todoList);
         Log.e("index", index.toString())
         Log.e("isComplete", value.toString())
 
-        todoList.isComplete = !g.isComplete;
-
+//        _todoList[index].isComplete = !value;
+        _todoList[index] = _todoList[index].copy(
+            id = todoList.id,
+            title = todoList.title,
+            task = todoList.task,
+            isComplete = true
+        )
         Log.e("list", _todoList[index].isComplete.toString())
     }
 }
