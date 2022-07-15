@@ -5,5 +5,5 @@ data class TodoList(
     val id:String,
     val title:String,
     val task:String,
-    val isComplete:Boolean
+    var isComplete:Boolean
 );

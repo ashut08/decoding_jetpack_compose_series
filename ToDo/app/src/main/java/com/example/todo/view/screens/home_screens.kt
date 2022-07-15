@@ -1,11 +1,17 @@
 package com.example.todo.view.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.todo.components.FullScreenDialog
 import com.example.todo.data.TodolistData
 import com.example.todo.model.TodoList
@@ -49,8 +55,15 @@ fun HomeScreens() {
         }
 
     ) {
+Column(
 
-        TodoListScreen(todoViewModel )
+    modifier = Modifier.padding(20.dp).fillMaxHeight(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+) {
+    TodoListScreen(todoViewModel )
+}
+
 
     }
 }
