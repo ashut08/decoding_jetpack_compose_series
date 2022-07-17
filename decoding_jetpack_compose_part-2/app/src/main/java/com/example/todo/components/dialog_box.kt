@@ -8,8 +8,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo.model.TodoList
@@ -37,37 +39,24 @@ fun FullScreenDialog(
             openDialog.value = false
         },
         title = {
-            Text(text = "Add Task")
+            Text(
+                text = "Add Task", modifier = Modifier.padding(20.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
         },
 
         text = {
-            Column() {
-                TextField(
-                    value = title,
-                    onValueChange = { newText ->
-                        title = newText
-                    },
+            Column(
+                modifier = Modifier.padding(10.dp),
+            ) {
 
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.Gray,
-
-
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent
-                    )
-
-                )
                 TextField(
                     value = task, onValueChange = { newText ->
                         task = newText
                     }, modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp),
+                        .padding(top = 20.dp),
                     shape = RoundedCornerShape(10.dp),
                     colors = TextFieldDefaults.textFieldColors(
 
@@ -83,19 +72,26 @@ fun FullScreenDialog(
             Button(
 
                 onClick = {
+                    if (task.text.isNotEmpty()) {
 
-                    noteViewModel.addTodoList(
-                        TodoList(
-                            id = UUID.randomUUID().toString(),
-                            title = title.text,
-                            task = task.text,
-                            isComplete = false
 
+                        noteViewModel.addTodoList(
+                            TodoList(
+                                id = UUID.randomUUID().toString(),
+
+                                task = task.text,
+                                isComplete = false
+
+                            )
                         )
-                    )
-                    openDialog.value = false
-                }) {
-                Text("This is the Confirm Button")
+                        openDialog.value = false
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green),
+            ) {
+                Text(
+                    "Add", color = Color.White,
+                )
             }
         },
         dismissButton = {
@@ -103,8 +99,12 @@ fun FullScreenDialog(
 
                 onClick = {
                     openDialog.value = false
-                }) {
-                Text("This is the dismiss Button")
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+            ) {
+                Text(
+                    "Cancel", color = Color.White,
+                )
             }
         }
 
