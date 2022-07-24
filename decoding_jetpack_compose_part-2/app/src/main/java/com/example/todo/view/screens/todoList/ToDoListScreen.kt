@@ -13,22 +13,21 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.todo.view.screens.todoList.TodoViewModel
 
 @Composable
 
 
-fun TodoListScreen(noteViewModel: NoteViewModel = viewModel()) {
+fun TodoListScreen(todoViewModel: TodoViewModel = viewModel()) {
 
-    val checkedState = remember { mutableStateOf(true) }
-    if (noteViewModel.getAllToDoList().isEmpty())
+
+    if (todoViewModel.getAllToDoList().isEmpty())
 
 
         Text(
@@ -39,7 +38,7 @@ fun TodoListScreen(noteViewModel: NoteViewModel = viewModel()) {
         LazyColumn(modifier = Modifier.fillMaxHeight()) {
 
 
-            items(noteViewModel.getAllToDoList()) {
+            items(todoViewModel.getAllToDoList()) {
                 Log.e("_todoList", "" + it.isComplete)
 
 
@@ -73,8 +72,11 @@ fun TodoListScreen(noteViewModel: NoteViewModel = viewModel()) {
 
                             onCheckedChange = { value ->
 
+                                todoViewModel.markAsComplete(
+                                    todoItem = it,
+                                    value = !value,
 
-                                noteViewModel.markAsComplete(todoList = it, value = value)
+                                    )
 
                             },
                         )
@@ -84,7 +86,7 @@ fun TodoListScreen(noteViewModel: NoteViewModel = viewModel()) {
                             imageVector = Icons.Filled.Delete, contentDescription = "Delete",
 
                             modifier = Modifier.clickable {
-                                noteViewModel.removeTodoItem(it)
+                                todoViewModel.removeTodoItem(it)
                             },
                             tint = Color.Red
                         )

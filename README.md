@@ -12,3 +12,16 @@ The repo contains the source code for all the article  of  decoding jetpack comp
 - Bottom Navigation.
 - Drawer Navigation.
 
+
+## Part-2\[ [Article Link](https://ashuflutterdev.medium.com/creating-simple-todo-app-using-jetpack-compose-mvvm-4d15c49689b7) \][ [Repo Link](https://github.com/ashut08/decoding_jetpack_compose_series/tree/main/decoding_jetpack_compose_part-2) \]
+- MVVM Architecture.
+- State in jetpack-compose .
+- View Model in jetpack-compose
+
+
+
+
+
+
+
+

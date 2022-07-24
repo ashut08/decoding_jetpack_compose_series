@@ -15,27 +15,26 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo.model.TodoList
-import com.example.todo.view.screens.NoteViewModel
+import com.example.todo.view.screens.todoList.TodoViewModel
 import java.util.*
 
 @Composable
 fun FullScreenDialog(
     openDialog: MutableState<Boolean>,
-    noteViewModel: NoteViewModel = viewModel()
+    todoViewModel: TodoViewModel = viewModel()
 
 
 ) {
-    var title by remember { mutableStateOf(TextFieldValue("")) }
+
     var task by remember { mutableStateOf(TextFieldValue("")) }
-//    val todo by remember { mutableStateOf(NoteViewModel()) }
+
     AlertDialog(
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = false),
 
         shape = RoundedCornerShape(16.dp),
         onDismissRequest = {
             // Dismiss the dialog when the user clicks outside the dialog or on the back
-            // button. If you want to disable that functionality, simply use an empty
-            // onCloseRequest.
+
             openDialog.value = false
         },
         title = {
@@ -74,17 +73,17 @@ fun FullScreenDialog(
                 onClick = {
                     if (task.text.isNotEmpty()) {
 
-
-                        noteViewModel.addTodoList(
+//add the the todoItem on the todoList
+                        todoViewModel.addTodoList(
                             TodoList(
-                                id = UUID.randomUUID().toString(),
+                                id = UUID.randomUUID().toString(), //generate unique id
 
-                                task = task.text,
-                                isComplete = false
+                                task = task.text,// text of the text field
+                                isComplete = false  // by default to do item is incomplete
 
                             )
                         )
-                        openDialog.value = false
+                        openDialog.value = false // for closing the dialog
                     }
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green),
@@ -98,7 +97,8 @@ fun FullScreenDialog(
             Button(
 
                 onClick = {
-                    openDialog.value = false
+                    openDialog.value =
+                        false //close the dialog to assign the value false when Cancel button is clicked
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
             ) {
