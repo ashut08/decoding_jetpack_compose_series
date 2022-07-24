@@ -2,8 +2,9 @@
 
 
 #### Part-2 Learning
-- MVVM
-- 
+- MVVM Architecture.
+- State in jetpack-compose .
+- View Model in jetpack-compose
 
 Part-3 Demo
 <p float="center">
