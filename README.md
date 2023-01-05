@@ -17,7 +17,8 @@ The repo contains the source code for all the article  of  decoding jetpack comp
 - MVVM Architecture.
 - State in jetpack-compose .
 - View Model in jetpack-compose
-
+## Part-3\[ [Article Link](https://medium.com/@ashuflutterdev/designing-an-onboarding-screen-in-jetpack-compose-like-linkedin-fb788e96ee2e) \][ [Repo Link](https://github.com/ashut08/decoding_jetpack_compose_series/tree/main/decoding_jetpack_compose_part-3) \]
+- Horizontal View Pager in jetpack-compose.
 
 
 

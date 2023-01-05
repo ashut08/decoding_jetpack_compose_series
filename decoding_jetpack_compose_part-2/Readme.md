@@ -6,7 +6,7 @@
 - State in jetpack-compose .
 - View Model in jetpack-compose
 
-Part-3 Demo
+Part-2 Demo
 <p float="center">
   <img src="screenshot/todo.gif" width="250" />
 
