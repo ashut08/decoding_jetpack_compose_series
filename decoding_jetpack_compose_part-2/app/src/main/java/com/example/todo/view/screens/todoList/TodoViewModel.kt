@@ -33,12 +33,13 @@ class TodoViewModel : ViewModel() {
                 id = it.id,
                 task = it.task,
 
-                isComplete = value
-
-
+                isComplete = adjust(_todoList[index])
             )
 
         }
+    }
 
+    private fun adjust(todoList: TodoList): Boolean {
+        return !todoList.isComplete
     }
 }
